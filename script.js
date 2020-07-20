@@ -17,27 +17,27 @@ var score = 0;
 var myQuestions = [
     {
         question: "What is 5 x 5?",
-        choices: [25, 5, 6, 7],
+        choices: [2.5, 25, 250, .25],
         answers: 25,
     },
     {
         question: "What is 10 x 10?",
-        choices: [100, 8, 7, 6],
+        choices: [.100, 100, 10, 1.00],
         answers: 100,
     },
     {
         question: "What is 5 x 10?",
-        choices: [50, 6, 7, 8],
+        choices: [55, 5.0, 510, 50],
         answers: 50,
     },
     {
         question: "What is 2 + 2?",
-        choices: [4, 6, 7, 8],
+        choices: [22, 42, 2, 4],
         answers: 4,
     },
     {
         question: "What is 4 - 4?",
-        choices: [0, 6, 7, 8],
+        choices: [0, .01, 8, 44],
         answers: 0,
     }
 ]
