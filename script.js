@@ -5,7 +5,10 @@ var answerButtonEl = document.querySelector("#answer-buttons");
 var buttonEl = document.querySelectorAll(".button");
 var timeEl = document.querySelector(".time");
 var scoreEl = document.querySelector(".score");
-var button1 = document.querySelectorAll(".button")[0]
+var finalScoreEl = document.querySelector(".final-score");
+var showScore = document.querySelector(".show-score");
+var highScoreBtn = document.querySelector(".highscore-button");
+var button1 = document.querySelectorAll(".button")[0];
 // attempting to create a for loop that will loop through the myQuestions array in order and when start is clicked the function startGame() will utilize this for loop to display the questions
 var currentQuestionIndex = 0;
 var secondsLeft = 20;
@@ -26,6 +29,16 @@ var myQuestions = [
         question: "What is 5 x 10?",
         choices: [50, 6, 7, 8],
         answers: 50,
+    },
+    {
+        question: "What is 2 + 2?",
+        choices: [4, 6, 7, 8],
+        answers: 4,
+    },
+    {
+        question: "What is 4 - 4?",
+        choices: [0, 6, 7, 8],
+        answers: 0,
     }
 ]
 
@@ -52,11 +65,23 @@ function startGame() {
 
 }
 
+function endGame() {
+    questionContainer.classList.add('hide');
+    finalScoreEl.classList.remove('hide');
+    showScore.textContent = score;
+}
+
 var currentQuestionIndex = 0
 
 function getQuestion() {
     var currentQuestion = myQuestions[currentQuestionIndex];//this is an object
-    questionEl.textContent = currentQuestion.question; 
+    console.log(currentQuestionIndex);
+
+    if (currentQuestionIndex == 5 || timeEl.textContent == "0") {
+        endGame();
+    } else {
+        questionEl.textContent = currentQuestion.question;
+    
     
 
 
@@ -69,16 +94,19 @@ function getQuestion() {
         //function will check to see if value chosen will be correct or wrong and effect time
         console.log(currentChoice)
         buttonEl[i].textContent = currentChoice;
-     
+        
+    }
     }
     //provide feedback whether wrong or right, and will need to increase currentQuestionIndex by 1
     //if not at end of quiz will need to get next question and loop through and repeat until end of quiz
-    //
-    
+    //  
 }
-    
 
+function highScores () {
+    finalScoreEl.classList.add('hide');
+}
 
+highScoreBtn.addEventListener('click', highScores)
 
 startButton.addEventListener('click', startGame)
 
@@ -87,7 +115,7 @@ answerButtonEl.addEventListener('click', function(event) {
 
     var userAnswer = (event.target.innerHTML);
 
-    if (userAnswer === "25" || userAnswer === "100"  || userAnswer === "50" ) {
+    if (userAnswer === "25" || userAnswer === "100"  || userAnswer === "50"  || userAnswer === "4"  || userAnswer === "0") {
         alert("Correct");
         score++;
         scoreEl.textContent = score;
@@ -97,6 +125,10 @@ answerButtonEl.addEventListener('click', function(event) {
     }
 
     getQuestion();
+
+    if (currentQuestionIndex > myQuestions.length) {
+        endGame()
+    }
 })
 
 // need to create a global variable keeping track of right and wqrong answers. increase totaly correct tally to keep score.
