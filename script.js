@@ -9,6 +9,8 @@ var finalScoreEl = document.querySelector(".final-score");
 var showScore = document.querySelector(".show-score");
 var highScoreBtn = document.querySelector(".highscore-button");
 var button1 = document.querySelectorAll(".button")[0];
+var saveUser = document.querySelector(".saveUser");
+var leaderboardEl = document.querySelector(".leaderboard")
 // attempting to create a for loop that will loop through the myQuestions array in order and when start is clicked the function startGame() will utilize this for loop to display the questions
 var currentQuestionIndex = 0;
 var secondsLeft = 20;
@@ -41,6 +43,62 @@ var myQuestions = [
         answers: 0,
     }
 ]
+//get data from ls and convert to array
+var list = JSON.parse(localStorage.getItem("highScoreList"));
+
+    //console.log(localStorage.getItem("name"))
+
+    // if not ls make me an empty array
+    if (!Array.isArray(list)) {
+      list = [];
+    }
+
+    saveUser.addEventListener('click', function(event) {
+        event.preventDefault();
+    // Setting the input value to a variable and then clearing the input
+    var val = document.querySelector(".username").value;
+    document.querySelector(".username").value="";
+    console.log(val)
+    var userObj={
+        name:val,
+        score:score
+    }
+
+    // Adding our new todo to our local list variable and adding it to local storage
+    list.push(userObj);
+    localStorage.setItem("highScoreList", JSON.stringify(list));
+    console.log(" List Array: "+list)
+
+    putOnPage();
+  });
+
+  function putOnPage() 
+  {
+
+  document.querySelector("#todo-list").innerHTML=""; // empties out the html
+
+    var insideList = JSON.parse(localStorage.getItem("highScoreList"));
+
+    // Checks to see if we have any todos in localStorage
+    // If we do, set the local insideList variable to our todos
+    // Otherwise set the local insideList variable to an empty array
+    if (!Array.isArray(insideList)) {
+      insideList = [];
+    }
+
+
+    // render our insideList todos to the page
+    for (var i = 0; i < insideList.length; i++) {
+      var p = document.createElement("p");
+      p.innerHTML=insideList[i].name+ " "+insideList[i].score;
+    
+
+
+      //append = inside paragraph area we stick the button.
+      //p.append(b);
+      document.querySelector("#todo-list").appendChild(p);
+    }
+  }
 
 
 function startGame() {
@@ -103,7 +161,8 @@ function getQuestion() {
 }
 
 function highScores () {
-    finalScoreEl.classList.add('hide');
+    finalScoreEl.classList.add("hide");
+    leaderboardEl.classList.remove("hide");
 }
 
 highScoreBtn.addEventListener('click', highScores)

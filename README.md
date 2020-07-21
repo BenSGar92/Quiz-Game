@@ -8,6 +8,10 @@ Quiz Game - Week 4
 -Created the various buttons and styled them in style.css
 -Assigned hide classes to various <divs> to be manipulated with an event.listener which would add or remove display: none;
 -Created an event.listener on the start button to run a function of startGAme() which would run a timer and execute the getQuestion() function that would cycle through and display the questions and answers
--At the end of the quiz the final score is shown
+-score counter increments by 1 if the user answers correctly
+-At the end of the quiz the final score is shown with an input allowing their name to be added
 
--Still need timer to adjust based on the choice, the highscores to be saved the local data and shown on a leaderboard list.
+
+
+
+
