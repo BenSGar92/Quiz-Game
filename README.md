@@ -1,4 +1,4 @@
-# Week-4-HW
+# Quiz Game
 Quiz Game - Week 4
 
 HTML
